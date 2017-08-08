@@ -1,4 +1,3 @@
-import { Deck } from './deck';
 import { Rank } from './rank';
 import { Card } from './card';
 

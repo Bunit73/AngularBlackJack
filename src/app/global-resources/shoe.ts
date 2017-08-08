@@ -9,27 +9,20 @@ export class Shoe {
     private _cut: number;
 
     constructor(deckCount?: number, cut?: number) {
+        const totalShoeSize = this._numberOfDecks * Object.keys(Rank).length / 2 * Object.keys(Suit).length;
+
         if (deckCount === null) {
             this._numberOfDecks = 1;
         }
 
-        if (cut === null) {
-            this._cut = this._numberOfDecks * Object.keys(Rank).length / 2 * Object.keys(Suit).length * .75 ;
+        if (cut === null || cut >= 1) {
+            this._cut = totalShoeSize * .75 ;
+        } else if ( cut < (totalShoeSize * .4)) {
+            this._cut = 1 - cut ;
+        } else {
+            this._cut = cut;
         }
-
-        for (let i = 0; i < this._numberOfDecks; i++) {
-            // Generate all 52 cards for the deck
-            for (const r in Rank) {
-                if (typeof Rank[r] === 'number') {
-                    for (const s in Suit) {
-                        if (typeof Suit[s] === 'number') {
-                            this._cards.push(new Card( Number(Suit[s]), Number(Rank[r])));
-                        }
-                    }
-                }
-            }
-        }
-        this.shuffle(this._cards);
+        this.resetShoe();
     }
 
     /**
@@ -48,10 +41,23 @@ export class Shoe {
     }
 
     private resetShoe() {
-        throw new Error("Method not implemented.");
+        this._cards = [];
+        for (let i = 0; i < this._numberOfDecks; i++) {
+            // Generate all 52 cards for the deck
+            for (const r in Rank) {
+                if (typeof Rank[r] === 'number') {
+                    for (const s in Suit) {
+                        if (typeof Suit[s] === 'number') {
+                            this._cards.push(new Card( Number(Suit[s]), Number(Rank[r])));
+                        }
+                    }
+                }
+            }
+        }
+        this.shuffle(this._cards);
     }
 
     public popCard() {
-        throw new Error("Method not implemented.");
+        return this._cards.pop();
     }
 }
