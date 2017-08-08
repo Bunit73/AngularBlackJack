@@ -7,22 +7,27 @@ export class Shoe {
     private _cards: Array<Card> = [];
     private _numberOfDecks: number;
     private _cut: number;
+    private _singleDeck: boolean;
 
     constructor(deckCount?: number, cut?: number) {
         const totalShoeSize = this._numberOfDecks * Object.keys(Rank).length / 2 * Object.keys(Suit).length;
-
         if (deckCount === null) {
             this._numberOfDecks = 1;
+        } else {
+            this._numberOfDecks = deckCount;
         }
 
-        if (cut === null || cut >= 1) {
+        if (cut === null) {
             this._cut = totalShoeSize * .75 ;
-        } else if ( cut < (totalShoeSize * .4)) {
+        } else if ( this._numberOfDecks === 1) {
+            this._cut = 1;
+        } else if ( cut < (totalShoeSize * .5)) {
             this._cut = 1 - cut ;
         } else {
             this._cut = cut;
         }
-        this.resetShoe();
+        this._singleDeck = deckCount === 1 ? true : false;
+        this.populateShoe();
     }
 
     /**
@@ -40,13 +45,13 @@ export class Shoe {
         return this._cards;
     }
 
-    private resetShoe() {
+    private populateShoe() {
         this._cards = [];
         for (let i = 0; i < this._numberOfDecks; i++) {
             // Generate all 52 cards for the deck
-            for (const r in Rank) {
+            for (let r in Rank) {
                 if (typeof Rank[r] === 'number') {
-                    for (const s in Suit) {
+                    for (let s in Suit) {
                         if (typeof Suit[s] === 'number') {
                             this._cards.push(new Card( Number(Suit[s]), Number(Rank[r])));
                         }
@@ -59,5 +64,13 @@ export class Shoe {
 
     public popCard() {
         return this._cards.pop();
+    }
+
+    public remaingCards() {
+        return this._cards.length;
+    }
+
+    get singleDeck() {
+        return this._singleDeck;
     }
 }

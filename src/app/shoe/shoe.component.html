@@ -1,0 +1,24 @@
+<div class="d-flexflex-column align-items-center align-items-center middle-right-flex">
+  <img src="/assets/cards/card_back.svg" alt="Card back" class="shoe">
+  <form>
+    <strong>Shoe Settings</strong>
+    <div class="form-group">
+      <label for="shoe-size">Shoe Size</label>
+      <select id="shoe-size">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="cut-placement">Cut Placement</label>
+      <input class="form-control" type="number" min="0" max="{{ deckSize }}" placeholder="0">
+    </div>
+    <button class="btn btn-default">Reset Shoe</button>
+  </form>
+  <div>
+    <strong>Remaing Cards: </strong><span>{{ cardsRemaining }}</span>  
+  </div>
+</div>
+
