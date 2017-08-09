@@ -1,0 +1,16 @@
+.middle-right-flex{
+    /* align-items: center;
+    justify-content: flex-end;
+    height:100%; */
+    position:fixed;
+    right:0;
+    bottom: 0;
+    height: 75%;
+    padding-left: 20px;
+    padding-right: 50px;
+}
+
+.shoe{
+    max-width: 160px;
+    padding-bottom: 50px;
+}
