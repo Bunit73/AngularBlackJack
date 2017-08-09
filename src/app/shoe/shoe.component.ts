@@ -1,4 +1,4 @@
-import { GameService } from './../services/game.service';
+import { ShoeService } from './../services/shoe.service';
 import { Shoe } from './../global-resources/shoe';
 import { Component, OnInit, Input } from '@angular/core';
 
@@ -10,12 +10,10 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ShoeComponent implements OnInit {
   @Input('cardsRemaining') cardsRemaining: number;
   @Input('deckSize') deckSize: number;
-  private _shoe: Shoe;
 
-  constructor(private gameService: GameService) {
-    this._shoe = new Shoe(1);
-    this.cardsRemaining = 0;
-    this.deckSize = this._shoe.cards.length;
+  constructor(private shoeService: ShoeService) {
+    this.cardsRemaining = shoeService.getDeckSize();
+    this.deckSize = shoeService.getDeckSize();
   }
 
   ngOnInit() {

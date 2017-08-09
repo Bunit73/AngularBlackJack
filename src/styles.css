@@ -2,3 +2,9 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 
 body { padding: 20px; }
+
+.card {
+    max-width: 160px;
+    padding: 5px;
+    border: none;
+}

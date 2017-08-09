@@ -25,12 +25,16 @@ export class Hand {
             if (c.isAce()) {
                 aceCount += 1;
             }
-            val += c.rank;
+            val += c.value;
         });
         while ( val > 21 && aceCount ) {
             val -= 10;
             aceCount -= 1;
         }
         return val;
+    }
+
+    get cards(){
+        return this._cards;
     }
 }
