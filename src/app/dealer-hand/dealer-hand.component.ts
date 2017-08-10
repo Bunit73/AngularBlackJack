@@ -3,12 +3,28 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { Hand } from "../global-resources/hand";
 import { Card } from "../global-resources/card";
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-dealer-hand',
   templateUrl: './dealer-hand.component.html',
-  styleUrls: ['./dealer-hand.component.css']
+  styleUrls: ['./dealer-hand.component.css'],
+  animations: [
+    trigger('fade', [
+      transition('void => *', [
+        style({
+          opacity: 0,
+          transform: 'translateX(100%)'
+        }),
+        animate('0.3s ease-in')
+      ]),
+      transition('* => void', [
+        animate(2000, style({ opacity: 0 }))
+      ])
+    ])
+  ]
 })
+
 export class DealerHandComponent implements OnInit {
   private subscription: Subscription;
   hand: Hand;

@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-center player-card-area">
   <div *ngFor="let c of hand.cards">
-    <img src="/assets/cards/{{ c.imgLink }}" alt="Card" class="card">
+    <img @fade src="/assets/cards/{{ c.imgLink }}" alt="Card" class="card">
   </div>
 </div>
