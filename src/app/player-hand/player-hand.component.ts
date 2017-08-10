@@ -12,7 +12,6 @@ import { Subscription } from "rxjs/Subscription";
 export class PlayerHandComponent implements OnInit {
   private subscription: Subscription;
   hand: Hand;
-  cardList: Array<Card>;
 
   constructor(private shoeService: ShoeService) {
     this.hand = new Hand();
@@ -33,7 +32,6 @@ export class PlayerHandComponent implements OnInit {
 
   private addToHand(c: Card) {
     this.hand.addCard(c);
-    console.log(this.hand);
   }
 
   private clearHand() {

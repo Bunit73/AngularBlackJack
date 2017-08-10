@@ -5,10 +5,12 @@ export class Card {
     private _suit: Suit;
     private _rank: Rank;
     private _value: number;
+    private _faceDown: boolean;
 
     constructor( _suit?: Suit, _rank?: Rank) {
         this._suit = _suit;
         this._rank = _rank;
+        this._faceDown = false;
 
         if (this._rank === Rank.Ace) {
             this._value = 11;
@@ -17,6 +19,10 @@ export class Card {
         } else {
             this._value = _rank;
         }
+    }
+
+    public flipCard() {
+        this._faceDown = !this._faceDown;
     }
 
     get suit() {
@@ -29,6 +35,10 @@ export class Card {
 
     get value() {
         return this._value;
+    }
+
+    get faceDown() {
+        return this._faceDown;
     }
 
     get imgLink() {

@@ -1,5 +1,10 @@
 <div class="d-flex justify-content-center dealer-card-area">
-  <div *ngFor="let c of hand.cards">
-    <img src="/assets/cards/{{ c.imgLink }}" alt="Card" class="card">
+  <div *ngFor="let card of hand.cards">
+    <div *ngIf="card.faceDown; else elseBlock">
+      <img src="/assets/cards/card_back.svg" alt="Card" class="card">   
+    </div>
+    <ng-template #elseBlock>
+        <img src="/assets/cards/{{ card.imgLink }}" alt="Card" class="card">   
+    </ng-template>
   </div>
 </div>

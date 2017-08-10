@@ -16,6 +16,10 @@ export class ShoeService {
     this._shoe = new Shoe(1);
   }
 
+  public resetShoe(numberOfDecks: number, cut?) {
+    this._shoe = new Shoe(numberOfDecks, cut);
+  }
+
   getDeckSize() {
     return this._shoe.remaingCards();
   }
