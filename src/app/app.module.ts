@@ -2,7 +2,7 @@ import { PlayerHandService } from './services/player-hand.service';
 import { ShoeService } from './services/shoe.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
 import { ShoeComponent } from './shoe/shoe.component';
@@ -19,7 +19,8 @@ import { DealerHandService } from "./services/dealer-hand.service";
     DealerHandComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule
   ],
   providers: [ShoeService, PlayerHandService, DealerHandService],
   bootstrap: [AppComponent]
