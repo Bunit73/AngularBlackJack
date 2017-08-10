@@ -20,6 +20,8 @@ export class ControlPanelComponent implements OnInit {
   }
 
   deal() {
+    this.shoeService.resetShoe(1);
+
     this.shoeService.notifyCardUpdate({
       'newHand': true
     });
@@ -44,6 +46,7 @@ export class ControlPanelComponent implements OnInit {
 
     this.shoeService.notifyCardUpdate({
       'action': 'add',
+      'downCard': true,
       'player': 'dealer',
       'card': this.shoeService.dealCard()
     });

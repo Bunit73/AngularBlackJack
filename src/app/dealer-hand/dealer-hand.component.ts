@@ -32,6 +32,9 @@ export class DealerHandComponent implements OnInit {
 
   private addToHand(c: Card) {
     this.hand.addCard(c);
+    if (this.hand.cards.length === 2 ) {
+      this.hand.flipCard(1);
+    }
   }
 
   private clearHand() {

@@ -34,6 +34,10 @@ export class Hand {
         return val;
     }
 
+    public flipCard(idx: number) {
+        this._cards[idx].flipCard();
+    }
+
     get cards(){
         return this._cards;
     }
