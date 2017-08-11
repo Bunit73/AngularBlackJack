@@ -8,7 +8,7 @@ import { ControlPanelComponent } from './control-panel/control-panel.component';
 import { ShoeComponent } from './shoe/shoe.component';
 import { PlayerHandComponent } from './player-hand/player-hand.component';
 import { DealerHandComponent } from './dealer-hand/dealer-hand.component';
-import { DealerHandService } from "./services/dealer-hand.service";
+import { DealerHandService } from './services/dealer-hand.service';
 
 @NgModule({
   declarations: [

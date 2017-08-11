@@ -1,8 +1,8 @@
 import { ShoeService } from './../services/shoe.service';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import { Hand } from "../global-resources/hand";
-import { Card } from "../global-resources/card";
+import { Hand } from '../global-resources/hand';
+import { Card } from '../global-resources/card';
 import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({

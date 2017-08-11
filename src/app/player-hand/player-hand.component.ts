@@ -2,8 +2,8 @@ import { Card } from './../global-resources/card';
 import { Hand } from './../global-resources/hand';
 import { Component, OnInit } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
-import { ShoeService } from "../services/shoe.service";
-import { Subscription } from "rxjs/Subscription";
+import { ShoeService } from '../services/shoe.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-player-hand',

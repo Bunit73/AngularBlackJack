@@ -49,8 +49,10 @@ export class Shoe {
         this._cards = [];
         for (let i = 0; i < this._numberOfDecks; i++) {
             // Generate all 52 cards for the deck
+            // tslint:disable-next-line:prefer-const
             for (let r in Rank) {
                 if (typeof Rank[r] === 'number') {
+                    // tslint:disable-next-line:prefer-const
                     for (let s in Suit) {
                         if (typeof Suit[s] === 'number') {
                             this._cards.push(new Card( Number(Suit[s]), Number(Rank[r])));
