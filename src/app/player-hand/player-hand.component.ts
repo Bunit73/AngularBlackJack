@@ -1,6 +1,6 @@
 import { Card } from './../global-resources/card';
 import { Hand } from './../global-resources/hand';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { ShoeService } from '../services/shoe.service';
 import { Subscription } from 'rxjs/Subscription';
@@ -27,9 +27,11 @@ import { Subscription } from 'rxjs/Subscription';
 export class PlayerHandComponent implements OnInit {
   private subscription: Subscription;
   hand: Hand;
+  @Input('currentScore') currentScore: number;
 
   constructor(private shoeService: ShoeService) {
     this.hand = new Hand();
+    this.currentScore = 0;
   }
 
   ngOnInit() {
@@ -40,6 +42,7 @@ export class PlayerHandComponent implements OnInit {
       if (res.player === 'player') {
         if ( res.action === 'add' ) {
           this.addToHand(res.card);
+          this.updateScore();
         }
       }
     });
@@ -51,6 +54,10 @@ export class PlayerHandComponent implements OnInit {
 
   private clearHand() {
     this.hand = new Hand();
+  }
+
+  private updateScore() {
+    this.currentScore = this.hand.getValue();
   }
 
 }

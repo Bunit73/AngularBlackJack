@@ -20,11 +20,11 @@ export class ShoeService {
     this._shoe = new Shoe(numberOfDecks, cut);
   }
 
-  getDeckSize() {
+  public getDeckSize() {
     return this._shoe.remaingCards();
   }
 
-  dealCard() {
+  public dealCard() {
     return this._shoe.popCard();
   }
 

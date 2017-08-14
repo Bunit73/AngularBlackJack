@@ -52,4 +52,15 @@ export class ControlPanelComponent implements OnInit {
     });
   }
 
+  hit() {
+    this.shoeService.notifyCardUpdate({
+      'action': 'add',
+      'player': 'player',
+      'card': this.shoeService.dealCard()
+    });
+  }
+
+  stand() {
+    console.log('stand');
+  }
 }
