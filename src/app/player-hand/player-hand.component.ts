@@ -1,6 +1,7 @@
+import { PlayerHandService } from './../services/player-hand.service';
 import { Card } from './../global-resources/card';
 import { Hand } from './../global-resources/hand';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { ShoeService } from '../services/shoe.service';
 import { Subscription } from 'rxjs/Subscription';
@@ -26,10 +27,12 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class PlayerHandComponent implements OnInit {
   private subscription: Subscription;
-  hand: Hand;
+  busted: boolean;
+  @Input('currentScore') currentScore: number;
 
-  constructor(private shoeService: ShoeService) {
-    this.hand = new Hand();
+  constructor(private shoeService: ShoeService, private playerHandService: PlayerHandService) {
+    this.busted = false;
+    this.currentScore = 0;
   }
 
   ngOnInit() {
@@ -40,17 +43,36 @@ export class PlayerHandComponent implements OnInit {
       if (res.player === 'player') {
         if ( res.action === 'add' ) {
           this.addToHand(res.card);
+          this.updateScore();
+          if (this.blackJackCheck()) {
+            console.log('black jack');
+          }
+          if (this.currentScore > 21 ) {
+            console.log('busted');
+          }
         }
       }
     });
   }
 
   private addToHand(c: Card) {
-    this.hand.addCard(c);
+    this.playerHandService.addToHand(c);
   }
 
   private clearHand() {
-    this.hand = new Hand();
+    this.busted = false;
+    this.playerHandService.resetHand();
+  }
+
+  private updateScore() {
+    this.currentScore = this.playerHandService.currentScore();
+  }
+
+  private blackJackCheck() {
+    // if (this.currentScore === 21 ) {
+    //   return true;
+    // }
+    return false;
   }
 
 }

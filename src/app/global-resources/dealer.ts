@@ -1,8 +1,7 @@
-import { Iplayer } from './Iplayer';
 import { Hand } from './hand';
 import { Card } from './card';
 
-export class Dealer implements Iplayer {
+export class Dealer {
     _name: string;
     _hand: Hand;
     _busted: boolean;

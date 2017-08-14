@@ -1,11 +1,24 @@
 <div class="container fixed-bottom">
   <div class="btn-toolbar justify-content-center">
     <div class="btn-group group ">
-        <button class="btn btn-default" (click)="deal()">Deal</button>
-        <button class="btn btn-default">Stand</button>
-        <button class="btn btn-default">Double</button>
-        <button class="btn btn-default">Split</button>
-        <button class="btn btn-default">Insurance</button>
+        <button class="btn btn-default" 
+        (click)="deal()"
+        *ngIf="dealPhase"
+        >Deal</button>
+        <button class="btn btn-default" 
+        (click)="hit()"
+        *ngIf="playerPhase"
+        >Hit</button>
+        <button class="btn btn-default" 
+        (click)="stand()"
+        *ngIf="playerPhase"
+        >Stand</button>
+        <button class="btn btn-default"
+        *ngIf="playerPhase">Double</button>
+        <!-- <button class="btn btn-default"
+        *ngIf="playerPhase">Split</button> -->
+        <button class="btn btn-default"
+        *ngIf="playerPhase">Insurance</button>
     </div>
     <div class="input-group group">
         <span class="input-group-addon">Wager $</span>

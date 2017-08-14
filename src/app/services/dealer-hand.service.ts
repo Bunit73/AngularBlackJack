@@ -1,21 +1,26 @@
+import { Ihand } from './Ihand.service';
 import { Card } from './../global-resources/card';
 import { Hand } from './../global-resources/hand';
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class DealerHandService {
-  private _hand: Hand;
+export class DealerHandService implements Ihand {
+  hand: Hand;
 
   constructor() {
-    this._hand = new Hand();
+    this.hand = new Hand();
   }
 
-  addToHand(c: Card) {
-    this._hand.addCard(c);
+  public addToHand(c: Card) {
+    this.addToHand(c);
   }
 
-  getCards() {
+  public currentScore() {
+    return this.hand.getValue();
+  }
 
+  public resetHand() {
+    this.hand = new Hand();
   }
 
 }
