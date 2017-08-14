@@ -48,7 +48,10 @@ export class PlayerHandComponent implements OnInit {
             console.log('black jack');
           }
           if (this.currentScore > 21 ) {
-            console.log('busted');
+            this.busted = true;
+            this.playerHandService.notifyPlayerUpdate({
+              'action': 'player-busted'
+            });
           }
         }
       }

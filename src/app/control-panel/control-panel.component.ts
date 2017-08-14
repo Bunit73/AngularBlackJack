@@ -3,6 +3,7 @@ import { PlayerHandService } from './../services/player-hand.service';
 import { ShoeService } from './../services/shoe.service';
 import { Card } from './../global-resources/card';
 import { Component, OnInit, Input } from '@angular/core';
+import { Subscription } from "rxjs/Subscription";
 
 @Component({
   selector: 'app-control-panel',
@@ -10,7 +11,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./control-panel.component.css']
 })
 export class ControlPanelComponent implements OnInit {
-
+  private subscription: Subscription;
   dealPhase: boolean;
   playerPhase: boolean;
   dealerPhase: boolean;
@@ -23,6 +24,13 @@ export class ControlPanelComponent implements OnInit {
     }
 
   ngOnInit() {
+    this.subscription = this.playerHandService.notifyObservable$.subscribe((res) => {
+      if ( res.action === 'player-busted' ) {
+        this.dealPhase = true;
+        this.playerPhase = false;
+        this.dealerPhase = false;
+      }
+    });
   }
 
   deal() {
@@ -82,4 +90,5 @@ export class ControlPanelComponent implements OnInit {
   insurance() {
     console.log('insurance');
   }
+
 }
