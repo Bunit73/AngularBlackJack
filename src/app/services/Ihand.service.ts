@@ -3,7 +3,7 @@ import { Hand } from '../global-resources/hand';
 
 export interface Ihand {
     hand: Hand;
-    addToHad(c: Card);
+    addToHand(c: Card);
     currentScore();
     resetHand();
 }

@@ -11,8 +11,8 @@ export class DealerHandService implements Ihand {
     this.hand = new Hand();
   }
 
-  public addToHad(c: Card) {
-    this.addToHad(c);
+  public addToHand(c: Card) {
+    this.addToHand(c);
   }
 
   public currentScore() {

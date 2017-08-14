@@ -11,8 +11,8 @@ export class PlayerHandService implements Ihand {
     this.hand = new Hand();
   }
 
-  public addToHad(c: Card) {
-    this.addToHad(c);
+  public addToHand(c: Card) {
+    this.hand.addCard(c);
   }
 
   public currentScore() {

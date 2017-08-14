@@ -1,7 +1,7 @@
 import { ShoeService } from './../services/shoe.service';
 import { Shoe } from './../global-resources/shoe';
 import { Component, OnInit, Input } from '@angular/core';
-import { Subscription } from "rxjs/Subscription";
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-shoe',
@@ -20,7 +20,7 @@ export class ShoeComponent implements OnInit {
 
   ngOnInit() {
     this.subscription = this.shoeService.notifyObservable$.subscribe((res) => {
-      if(res.action === 'add') {
+      if ( res.action === 'add' ) {
         this.cardsRemaining--;
       }
     });

@@ -1,8 +1,11 @@
 <div class="d-flex justify-content-center player-score-area">
-  <span><strong>Player Score: </strong>{{ currentScore }}</span>
+  <div *ngIf="!busted; else bustedMsg">
+    <span *ngIf="currentScore"><strong>Player Score: </strong>{{ currentScore }}</span>
+  </div>
+  <ng-template #bustedMsg>Busted</ng-template>
 </div>
 <div class="d-flex justify-content-center player-card-area">
-   <div *ngFor="let c of hand.cards">
+   <div *ngFor="let c of playerHandService.hand.cards">
       <img @fade src="/assets/cards/{{ c.imgLink }}" alt="Card" class="card">
    </div>
 </div>
