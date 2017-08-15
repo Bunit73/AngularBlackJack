@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs/Subscription';
 import { DealerHandService } from './../services/dealer-hand.service';
 import { PlayerHandService } from './../services/player-hand.service';
 import { ShoeService } from './../services/shoe.service';
@@ -10,7 +11,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./control-panel.component.css']
 })
 export class ControlPanelComponent implements OnInit {
-
+  private playerSubscription: Subscription;
   dealPhase: boolean;
   playerPhase: boolean;
   dealerPhase: boolean;
@@ -23,6 +24,13 @@ export class ControlPanelComponent implements OnInit {
     }
 
   ngOnInit() {
+    this.playerSubscription = this.playerHandService.notifyObservable$.subscribe((res) => {
+      if (res.action === 'start-dealer'){
+        this.dealPhase = true;
+        this.playerPhase = false;
+        this.dealerPhase = false;
+      }
+    })
   }
 
   deal() {

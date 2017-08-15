@@ -48,7 +48,8 @@ export class PlayerHandComponent implements OnInit {
             console.log('black jack');
           }
           if (this.currentScore > 21 ) {
-            console.log('busted');
+            this.busted = true;
+            this.endPlayerPhase();
           }
         }
       }
@@ -73,6 +74,12 @@ export class PlayerHandComponent implements OnInit {
     //   return true;
     // }
     return false;
+  }
+
+  private endPlayerPhase() {
+    this.playerHandService.notifyUpdate({
+      action: 'start-dealer'
+    })
   }
 
 }
