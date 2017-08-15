@@ -79,7 +79,7 @@ export class PlayerHandComponent implements OnInit {
   private endPlayerPhase() {
     this.playerHandService.notifyUpdate({
       action: 'start-dealer'
-    })
+    });
   }
 
 }

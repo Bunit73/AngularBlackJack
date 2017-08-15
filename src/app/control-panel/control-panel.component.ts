@@ -25,12 +25,12 @@ export class ControlPanelComponent implements OnInit {
 
   ngOnInit() {
     this.playerSubscription = this.playerHandService.notifyObservable$.subscribe((res) => {
-      if (res.action === 'start-dealer'){
+      if (res.action === 'start-dealer') {
         this.dealPhase = true;
         this.playerPhase = false;
         this.dealerPhase = false;
       }
-    })
+    });
   }
 
   deal() {
@@ -80,9 +80,9 @@ export class ControlPanelComponent implements OnInit {
   }
 
   stand() {
-    this.dealPhase = false;
+    this.dealPhase = true;
     this.playerPhase = false;
-    this.dealerPhase = true;
+    this.dealerPhase = false;
   }
   double() {
     console.log('double');
