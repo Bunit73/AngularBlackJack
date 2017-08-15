@@ -58,6 +58,7 @@ export class DealerHandComponent implements OnInit {
     this.playerSubscription = this.playerHandService.notifyObservable$.subscribe((res) => {
       if (res.action === 'start-dealer') {
         this.startDealer();
+        this.analyzeOutcome();
       }
     });
   }
@@ -85,6 +86,16 @@ export class DealerHandComponent implements OnInit {
       if ( this.currentScore > 21 ) {
         this.busted = true;
       }
+    }
+  }
+
+  private analyzeOutcome() {
+    if ( this.busted || (this.playerHandService.currentScore > this.dealerHandService.currentScore) ) {
+      console.log('player wins');
+    } else if ( this.playerHandService.currentScore < this.dealerHandService.currentScore ) {
+      console.log('dealer wins');
+    } else {
+      console.log('push');
     }
   }
 }
