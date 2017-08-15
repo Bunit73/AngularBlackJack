@@ -6,4 +6,5 @@ export interface Ihand {
     addToHand(c: Card);
     currentScore();
     resetHand();
+    notifyUpdate(data: any);
 }

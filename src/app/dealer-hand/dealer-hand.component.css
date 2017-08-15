@@ -3,3 +3,10 @@
     right: 0;
     left: 0;
 }
+
+.dealer-score-area {
+    position: fixed;
+    top: 250px;
+    right: 0;
+    left: 0;
+}

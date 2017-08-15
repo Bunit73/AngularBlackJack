@@ -17,7 +17,8 @@ export class ControlPanelComponent implements OnInit {
   dealerPhase: boolean;
 
   constructor(private shoeService: ShoeService,
-    private playerHandService: PlayerHandService, private dealerHandService: DealerHandService ) {
+    private playerHandService: PlayerHandService,
+    private dealerHandService: DealerHandService ) {
       this.dealPhase = true;
       this.playerPhase = false;
       this.dealerPhase = false;
@@ -80,13 +81,23 @@ export class ControlPanelComponent implements OnInit {
   }
 
   stand() {
+    this.playerHandService.notifyUpdate({
+      action: 'start-dealer'
+    });
     this.dealPhase = true;
     this.playerPhase = false;
     this.dealerPhase = false;
   }
+
   double() {
-    console.log('double');
+    this.shoeService.notifyCardUpdate({
+      'action': 'add',
+      'player': 'player',
+      'card': this.shoeService.dealCard()
+    });
+    this.stand();
   }
+
   insurance() {
     console.log('insurance');
   }
