@@ -1,5 +1,7 @@
+import { PlayerHandService } from './../services/player-hand.service';
+import { DealerHandService } from './../services/dealer-hand.service';
 import { ShoeService } from './../services/shoe.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { Hand } from '../global-resources/hand';
 import { Card } from '../global-resources/card';
@@ -26,34 +28,74 @@ import { trigger, transition, style, animate } from '@angular/animations';
 })
 
 export class DealerHandComponent implements OnInit {
-  private subscription: Subscription;
-  hand: Hand;
+  private shoeSubscription: Subscription;
+  private playerSubscription: Subscription;
+  busted: boolean;
+  @Input('currentScore') currentScore: number;
 
-  constructor(private shoeService: ShoeService) {
-    this.hand = new Hand();
+  constructor(private shoeService: ShoeService,
+    private dealerHandService: DealerHandService,
+    private playerHandService: PlayerHandService,
+  ) {
+    this.busted = false;
+    this.currentScore = 0;
    }
 
   ngOnInit() {
-    this.subscription = this.shoeService.notifyObservable$.subscribe((res) => {
+    this.shoeSubscription = this.shoeService.notifyObservable$.subscribe((res) => {
       if (res.newHand) {
-        this.clearHand();
+        this.currentScore = 0;
+        this.busted = false;
+        this.dealerHandService.resetHand();
       }
       if (res.player === 'dealer') {
         if ( res.action === 'add' ) {
-          this.addToHand(res.card);
+          this.dealerHandService.addToHand(res.card);
         }
+      }
+    });
+
+    this.playerSubscription = this.playerHandService.notifyObservable$.subscribe((res) => {
+      if (res.action === 'start-dealer') {
+        this.startDealer();
+        this.analyzeOutcome();
       }
     });
   }
 
-  private addToHand(c: Card) {
-    this.hand.addCard(c);
-    if (this.hand.cards.length === 2 ) {
-      this.hand.flipCard(1);
+  private clearHand() {
+    this.dealerHandService.resetHand();
+  }
+
+  private startDealer() {
+    this.dealerHandService.flipCard();
+    this.currentScore = this.dealerHandService.hand.getValue();
+    this.dealerActions();
+  }
+
+  private dealerActions() {
+    // dealer doesnt hit on soft 17
+    while ( this.currentScore < 17 ) {
+      this.shoeService.notifyCardUpdate({
+        'action': 'add',
+        'player': 'dealer',
+        'card': this.shoeService.dealCard()
+      });
+
+      this.currentScore = this.dealerHandService.hand.getValue();
+      if ( this.currentScore > 21 ) {
+        this.busted = true;
+      }
     }
   }
 
-  private clearHand() {
-    this.hand = new Hand();
+  private analyzeOutcome() {
+    if ( this.busted || (this.playerHandService.currentScore > this.dealerHandService.currentScore) ) {
+      console.log('player wins');
+    } else if ( this.playerHandService.currentScore < this.dealerHandService.currentScore ) {
+      console.log('dealer wins');
+    } else {
+      console.log('push');
+    }
   }
 }

@@ -21,7 +21,7 @@ export class ShoeComponent implements OnInit {
   ngOnInit() {
     this.subscription = this.shoeService.notifyObservable$.subscribe((res) => {
       if ( res.action === 'add' ) {
-        this.cardsRemaining--;
+        this.cardsRemaining = this.shoeService.getDeckSize();
       }
     });
   }

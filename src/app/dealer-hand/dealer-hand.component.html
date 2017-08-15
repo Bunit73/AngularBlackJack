@@ -1,12 +1,16 @@
 <div class="d-flex justify-content-center dealer-card-area">
-  <div *ngFor="let card of hand.cards">
-    
+  <div *ngFor="let card of dealerHandService.hand.cards">
       <div *ngIf="card.faceDown; else elseBlock">
         <img @fade src="/assets/cards/card_back.svg" alt="Card" class="card">   
       </div>
       <ng-template #elseBlock>
           <img @fade src="/assets/cards/{{ card.imgLink }}" alt="Card" class="card">   
       </ng-template>
-    
   </div>
+</div>
+<div class="d-flex justify-content-center dealer-score-area">
+  <div *ngIf="!busted; else bustedMsg">
+      <span *ngIf="currentScore"><strong>Dealer Score: </strong>{{ currentScore }}</span>
+  </div>
+  <ng-template #bustedMsg>Busted</ng-template>
 </div>
