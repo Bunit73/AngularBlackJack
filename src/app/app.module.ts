@@ -9,6 +9,7 @@ import { ShoeComponent } from './shoe/shoe.component';
 import { PlayerHandComponent } from './player-hand/player-hand.component';
 import { DealerHandComponent } from './dealer-hand/dealer-hand.component';
 import { DealerHandService } from './services/dealer-hand.service';
+import {MdChipsModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { DealerHandService } from './services/dealer-hand.service';
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MdChipsModule
   ],
   providers: [ShoeService, PlayerHandService, DealerHandService],
   bootstrap: [AppComponent]

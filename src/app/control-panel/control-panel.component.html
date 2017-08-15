@@ -22,8 +22,14 @@
         *ngIf="playerPhase">Insurance</button>
     </div>
     <div class="input-group group">
-        <span class="input-group-addon">Wager $</span>
-        <input type="money" class="form-control">
+        <!-- <span class="input-group-addon">Wager $</span>
+        <input type="money" class="form-control"> -->
+        <md-chip-list>
+          <md-chip>5</md-chip>
+          <md-chip selected="true" color="primary">25</md-chip>
+          <md-chip selected="true" color="accent">50</md-chip>
+          <md-chip selected="true" color="warn">100</md-chip>
+        </md-chip-list>
     </div>  
   </div>
 </div>
