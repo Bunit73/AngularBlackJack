@@ -12,9 +12,12 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ControlPanelComponent implements OnInit {
   private playerSubscription: Subscription;
+  private dealerSubscription: Subscription;
   dealPhase: boolean;
   playerPhase: boolean;
   dealerPhase: boolean;
+  wager: number;
+  bankRoll: number;
 
   constructor(private shoeService: ShoeService,
     private playerHandService: PlayerHandService,
@@ -22,14 +25,17 @@ export class ControlPanelComponent implements OnInit {
       this.dealPhase = true;
       this.playerPhase = false;
       this.dealerPhase = false;
+      this.wager = 0;
+      this.bankRoll = 1000;
     }
 
   ngOnInit() {
     this.playerSubscription = this.playerHandService.notifyObservable$.subscribe((res) => {
       if (res.action === 'start-dealer') {
-        this.dealPhase = true;
+        console.log('dealer phase');
+        this.dealPhase = false;
         this.playerPhase = false;
-        this.dealerPhase = false;
+        this.dealerPhase = true;
       }
     });
   }
@@ -65,14 +71,12 @@ export class ControlPanelComponent implements OnInit {
       'player': 'dealer',
       'card': this.shoeService.dealCard()
     });
-
     this.dealPhase = false;
     this.playerPhase = true;
     this.dealerPhase = false;
-
   }
 
-  hit() {
+  private hit() {
     this.shoeService.notifyCardUpdate({
       'action': 'add',
       'player': 'player',
@@ -80,16 +84,13 @@ export class ControlPanelComponent implements OnInit {
     });
   }
 
-  stand() {
+  private stand() {
     this.playerHandService.notifyUpdate({
       action: 'start-dealer'
     });
-    this.dealPhase = true;
-    this.playerPhase = false;
-    this.dealerPhase = false;
   }
 
-  double() {
+  private double() {
     this.shoeService.notifyCardUpdate({
       'action': 'add',
       'player': 'player',
@@ -98,7 +99,22 @@ export class ControlPanelComponent implements OnInit {
     this.stand();
   }
 
-  insurance() {
+  private insurance() {
     console.log('insurance');
+  }
+
+  private bet(val: number) {
+    this.wager += val;
+  }
+
+  private resetBet() {
+    this.wager = 0;
+  }
+
+  private newGame() {
+    this.dealPhase = true;
+    this.playerPhase = false;
+    this.dealerPhase = false;
+    this.resetBet();
   }
 }

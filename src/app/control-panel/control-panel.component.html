@@ -20,16 +20,27 @@
         *ngIf="playerPhase">Split</button> -->
         <button class="btn btn-default"
         *ngIf="playerPhase">Insurance</button>
+        <button class="btn btn-default"
+        (click)="newGame()"
+        *ngIf="dealerPhase">New Game</button>
     </div>
-    <div class="input-group group">
-        <!-- <span class="input-group-addon">Wager $</span>
-        <input type="money" class="form-control"> -->
+    <div class="input-group group" *ngIf="dealPhase">
+        <span class="bet-heading">Bet: </span>
         <md-chip-list>
-          <md-chip>5</md-chip>
-          <md-chip selected="true" color="primary">25</md-chip>
-          <md-chip selected="true" color="accent">50</md-chip>
-          <md-chip selected="true" color="warn">100</md-chip>
+          <md-chip
+          (click)="bet(5)"
+          >5</md-chip>
+          <md-chip selected="true" color="primary"
+          (click)="bet(25)"
+          >25</md-chip>
+          <md-chip selected="true" color="accent"
+          (click)="bet(50)">50</md-chip>
+          <md-chip selected="true" color="warn"
+          (click)="bet(100)"
+          >100</md-chip>
         </md-chip-list>
     </div>  
+    <span class="wager">Current Wager: {{ wager | currency:'USD':true}}</span>
+    <span class="bankRoll">Bank Roll: {{ bankRoll | currency:'USD':true}}</span>
   </div>
 </div>

@@ -71,6 +71,7 @@ export class DealerHandComponent implements OnInit {
     this.dealerHandService.flipCard();
     this.currentScore = this.dealerHandService.hand.getValue();
     this.dealerActions();
+    this.analyzeOutcome();
   }
 
   private dealerActions() {
