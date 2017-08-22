@@ -23,6 +23,9 @@
         <button class="btn btn-default"
         (click)="newGame()"
         *ngIf="dealerPhase">New Game</button>
+        <button class="btn btn-default"
+        (click)="openDialog()"
+        *ngIf="dealPhase">ATM</button>
     </div>
     <div class="input-group group" *ngIf="dealPhase">
         <span class="bet-heading">Bet: </span>

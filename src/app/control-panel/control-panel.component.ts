@@ -4,6 +4,9 @@ import { PlayerHandService } from './../services/player-hand.service';
 import { ShoeService } from './../services/shoe.service';
 import { Card } from './../global-resources/card';
 import { Component, OnInit, Input } from '@angular/core';
+import { MdDialog, MdDialogRef } from '@angular/material';
+import { FormGroup, FormArray, FormControl, FormBuilder, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-control-panel',
@@ -21,7 +24,9 @@ export class ControlPanelComponent implements OnInit {
 
   constructor(private shoeService: ShoeService,
     private playerHandService: PlayerHandService,
-    private dealerHandService: DealerHandService ) {
+    private dealerHandService: DealerHandService,
+    public dialog: MdDialog
+  ) {
       this.dealPhase = true;
       this.playerPhase = false;
       this.dealerPhase = false;
@@ -116,5 +121,34 @@ export class ControlPanelComponent implements OnInit {
     this.playerPhase = false;
     this.dealerPhase = false;
     this.resetBet();
+  }
+
+  private changeFunds(val: number) {
+    this.bankRoll += val;
+  }
+
+  openDialog() {
+    let dialogRef = this.dialog.open(ATMDialog);
+    dialogRef.afterClosed().subscribe(result => {
+      this.changeFunds(Number(result));
+    });
+
+  }
+}
+
+@Component({
+  selector: 'app-atm',
+  templateUrl: 'atm.component.html',
+})
+export class ATMDialog {
+  form;
+  constructor(public dialogRef: MdDialogRef<ATMDialog>,
+  public fb: FormBuilder) {
+    this.form = fb.group({
+      withdrawal: [0, Validators.required]
+    });
+  }
+  public formData() {
+    return this.form.value.withdrawal;
   }
 }

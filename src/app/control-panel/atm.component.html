@@ -1,0 +1,13 @@
+<h2 md-dialog-title>Add Funds</h2>
+<md-dialog-content>How Much Would You Like To Add?</md-dialog-content>
+<form [formGroup]="form">
+    <div class="input-group">
+        <span class="input-group-addon">$</span>
+        <input formControlName="withdrawal" type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+        <span class="input-group-addon">.00</span>
+    </div>
+</form>
+<md-dialog-actions>
+  <button md-button class="btn btn-success" [md-dialog-close]="formData()">Save</button>
+  <button md-button class="btn btn-danger" [md-dialog-close]="0">Cancel</button>
+</md-dialog-actions>
